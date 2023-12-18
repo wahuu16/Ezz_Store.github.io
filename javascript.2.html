@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifikasi JavaScript</title>
+</head>
+<body>
+
+<button onclick="showNotification()">Berhasil</button>
+
+<script>
+function showNotification() {
+  // Periksa apakah browser mendukung notifikasi
+  if ('Notification' in window) {
+    // Meminta izin untuk menampilkan notifikasi
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        // Membuat objek notifikasi
+        var notification = new Notification('Berhasil', {
+          body: 'Berhasil.',
+          icon: 'path/to/icon.png' // Ganti dengan path gambar ikon notifikasi
+        });
+
+        // Menangani klik pada notifikasi (opsional)
+        notification.onclick = function() {
+          console.log('Notifikasi diklik');
+        };
+      } else {
+        console.log('Izin notifikasi ditolak');
+      }
+    });
+  } else {
+    console.log('Browser tidak mendukung notifikasi');
+  }
+}
+</script>
+
+</body>
+</html>
